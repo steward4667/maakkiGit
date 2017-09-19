@@ -31,7 +31,8 @@ namespace Maakki
             init();
             username = id;
             password = pwd;
-            myThread = new Thread(MaakkiStart);
+            //myThread = new Thread(MaakkiStart);
+            myThread = new Thread(PhantomjsStart);
             myThread.Start();
          
 
@@ -74,13 +75,27 @@ namespace Maakki
             {
 
                
-            }
-               
-             
+            }                         
            // money = Convert.ToDouble( driver.FindElementById("lblRemain").Text);
-
         }
 
+        public void PhantomjsStart()
+        {
+            try
+            {
+                var driverService = PhantomJSDriverService.CreateDefaultService();
+                driverService.HideCommandPromptWindow = true;
+
+                var driver = new PhantomJSDriver(driverService);
+                driver.Url = "https://www.maakki.com";                   
+                System.Diagnostics.Debug.WriteLine(driver.PageSource);
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
 
         public string CheckProxy()
         {
