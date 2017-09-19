@@ -1,0 +1,35 @@
+﻿<Window x:Class="Maakki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Maakki"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="156*"/>
+            <RowDefinition Height="163*"/>
+        </Grid.RowDefinitions>
+        <Button Click="Button_Click" Margin="0,0,406,72.221">Start</Button>
+        <Button Click="Button_Click_1" Margin="0,89,406,146" Grid.RowSpan="2">Find</Button>
+        <Button Click="Button_Click_2" Margin="0,21.779,406,57" Grid.Row="1">Delete</Button>
+        <Button Click="kill_chrome" Margin="134,5,289,72.221">Kill Chrome</Button>
+        <StackPanel Grid.RowSpan="2" Margin="262,39,180,57">
+            <Label x:Name="AccountLabel" Content="帳號"></Label>
+            <TextBox x:Name="MyAccount"/>
+            <Label x:Name="PasswordtLabel" Content="密碼"></Label>
+            <TextBox x:Name="MyPassword"/>
+        </StackPanel>
+
+
+        <StackPanel Margin="412,10,0,44" Grid.RowSpan="2">
+            <Label x:Name="proxyLabel" Content="proxy IP"></Label>
+            <TextBox x:Name="proxyText"></TextBox>
+            <Button x:Name="checkProxy" Click="checkProxy_Click" Content="checkProxy" Height="20"/>
+            <Label x:Name="Currency_Label" Content="Currency"></Label>
+            <Button Click="Get_Currency" Content="currency"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
