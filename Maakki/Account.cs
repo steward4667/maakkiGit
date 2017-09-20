@@ -9,6 +9,7 @@ using OpenQA.Selenium.Support;
 using OpenQA.Selenium;
 using OpenQA.Selenium.PhantomJS;
 using System.Threading;
+using System.IO;
 
 namespace Maakki
 {
@@ -23,6 +24,8 @@ namespace Maakki
         public double money    { get; set; }
         ChromeDriver driver;
         ChromeOptions options;
+        PhantomJSDriver Pdriver;
+
         public Thread myThread { get; set; }
 
         public Account(string id,string pwd,string proxy)
@@ -86,14 +89,27 @@ namespace Maakki
                 var driverService = PhantomJSDriverService.CreateDefaultService();
                 driverService.HideCommandPromptWindow = true;
 
-                var driver = new PhantomJSDriver(driverService);
-                driver.Url = "https://www.maakki.com";                   
-                System.Diagnostics.Debug.WriteLine(driver.PageSource);
+                Pdriver = new PhantomJSDriver(driverService);
+                Pdriver.Url = "https://www.maakki.com/login.aspx";
+                Pdriver.FindElement(By.CssSelector("#Content > div:nth-child(2) > fieldset > div > div:nth-child(3) > label")).Click();
+                Pdriver.FindElementById("txtAccount").Clear();
+                Pdriver.FindElementById("txtAccount").SendKeys(username);
+                Pdriver.FindElementById("txtPassword").Clear();
+                Pdriver.FindElementById("txtPassword").SendKeys(password);
+                Pdriver.FindElementById("mainPageContent_Button1").Click();
+                Pdriver.Url = "https://www.maakki.com/dream/addSponsor.aspx";
+                
+
             }
             catch (Exception)
             {
 
             }
+            File.Delete(Environment.CurrentDirectory + "/mypicTemp.png");       
+            Pdriver.GetScreenshot().SaveAsFile( "mypicTemp.png", ScreenshotImageFormat.Png);
+
+            Pdriver.Quit();
+
 
         }
 
@@ -119,6 +135,8 @@ namespace Maakki
         {
             if(driver!=null)
             driver.Quit();
+            if (Pdriver != null)
+                Pdriver.Quit();
         }
 
        

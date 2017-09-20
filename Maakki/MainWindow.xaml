@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Maakki"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="156*"/>
-            <RowDefinition Height="163*"/>
-        </Grid.RowDefinitions>
-        <Button Click="Button_Click" Margin="0,0,406,72.221">Start</Button>
-        <Button Click="Button_Click_1" Margin="0,89,406,146" Grid.RowSpan="2">Find</Button>
-        <Button Click="Button_Click_2" Margin="0,21.779,406,57" Grid.Row="1">Delete</Button>
-        <Button Click="kill_chrome" Margin="134,5,289,72.221">Kill Chrome</Button>
-        <StackPanel Grid.RowSpan="2" Margin="262,39,180,57">
+        <StackPanel Margin="0,0,599,0">
+            <Button Click="Button_Click">Start</Button>
+            <Button Click="Button_Click_1">Find</Button>
+            <Button Click="Button_Click_2">Delete</Button>
+            <Button Click="kill_chrome" Content="Kill Chrome" />
+            <Button Click="ShowPic" Content="ShowPicture"/>
+            <Button Click="PicTemp" Content="PicTemp"></Button>
+        </StackPanel>
+        <StackPanel Margin="193,0,442,96">
             <Label x:Name="AccountLabel" Content="帳號"></Label>
             <TextBox x:Name="MyAccount"/>
             <Label x:Name="PasswordtLabel" Content="密碼"></Label>
@@ -23,13 +23,14 @@
         </StackPanel>
 
 
-        <StackPanel Margin="412,10,0,44" Grid.RowSpan="2">
-            <Label x:Name="proxyLabel" Content="proxy IP"></Label>
+        <StackPanel Margin="0,140,635,-86">
             <TextBox x:Name="proxyText"></TextBox>
             <Button x:Name="checkProxy" Click="checkProxy_Click" Content="checkProxy" Height="20"/>
             <Label x:Name="Currency_Label" Content="Currency"></Label>
             <Button Click="Get_Currency" Content="currency"/>
+            <Label x:Name="proxyLabel" Content="proxy IP"/>
         </StackPanel>
+        <Image x:Name="mypic_png" Margin="382,0,10,23" Stretch="Fill"/>
 
     </Grid>
 </Window>

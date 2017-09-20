@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using System.Diagnostics;
+using System.IO;
 
 namespace Maakki
 {
@@ -92,6 +93,39 @@ namespace Maakki
                 p.Kill();
             }
 
+
+            Process[] PhantomjsInstance = Process.GetProcessesByName("phantomjs");
+            foreach (Process p in PhantomjsInstance)
+            {
+                p.Kill();
+            }
+
+        }
+
+        private void ShowPic(object sender, RoutedEventArgs e)
+        {
+
+                mypic_png.Source = null;
+            try {
+                File.Delete(Environment.CurrentDirectory + @"\mypic.png");
+                File.Move(Environment.CurrentDirectory + @"\mypicTemp.png", Environment.CurrentDirectory + @"\mypic.png");
+
+            
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource=new Uri(Environment.CurrentDirectory + @"\mypic.png");
+               // bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+
+                 mypic_png.Source = bitmap;
+            }
+            catch (Exception) { }
+
+        }
+
+        private void PicTemp(object sender, RoutedEventArgs e)
+        {
+            mypic_png.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + @"\TEMP.png"));
         }
     }
 }
