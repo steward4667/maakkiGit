@@ -12,7 +12,6 @@
             <Button Click="Button_Click_1">Find</Button>
             <Button Click="Button_Click_2">Delete</Button>
             <Button Click="kill_chrome" Content="Kill Chrome" />
-            <Button Click="ShowPic" Content="ShowPicture"/>
             <Button Click="PicTemp" Content="PicTemp"></Button>
         </StackPanel>
         <StackPanel Margin="193,0,442,96">

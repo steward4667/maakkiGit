@@ -37,7 +37,7 @@ namespace Maakki
             //myThread = new Thread(MaakkiStart);
             myThread = new Thread(PhantomjsStart);
             myThread.Start();
-         
+      
 
         }
 
@@ -105,8 +105,8 @@ namespace Maakki
             {
 
             }
-            File.Delete(Environment.CurrentDirectory + "/mypicTemp.png");       
-            Pdriver.GetScreenshot().SaveAsFile( "mypicTemp.png", ScreenshotImageFormat.Png);
+            File.Delete(Environment.CurrentDirectory + "/mypic.png");       
+            Pdriver.GetScreenshot().SaveAsFile( "mypic.png", ScreenshotImageFormat.Png);
 
             Pdriver.Quit();
 

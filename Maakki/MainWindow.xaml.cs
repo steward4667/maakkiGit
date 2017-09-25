@@ -25,6 +25,8 @@ namespace Maakki
     {
 
         List<Account> MaakkiList;
+        private static int count = 1;
+       
         
 
         public MainWindow()
@@ -32,15 +34,20 @@ namespace Maakki
             InitializeComponent();
             MaakkiList = new List<Account>();
            
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(ShowPic);
+            timer.Interval = 1000;
+            timer.Enabled = true;
+            timer.AutoReset = true;
+
+            
         }
 
+      
         private void Button_Click(object sender, RoutedEventArgs e)
         {
           
-            MaakkiList.Add(new Account(MyAccount.Text, MyPassword.Text, proxyText.Text));
-           
-
-
+            MaakkiList.Add(new Account(MyAccount.Text, MyPassword.Text, proxyText.Text));         
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -102,26 +109,32 @@ namespace Maakki
 
         }
 
-        private void ShowPic(object sender, RoutedEventArgs e)
+        private void ShowPic(object sender, System.Timers.ElapsedEventArgs e)
         {
-
-                mypic_png.Source = null;
+      
             try {
-                File.Delete(Environment.CurrentDirectory + @"\mypic.png");
-                File.Move(Environment.CurrentDirectory + @"\mypicTemp.png", Environment.CurrentDirectory + @"\mypic.png");
 
-            
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource=new Uri(Environment.CurrentDirectory + @"\mypic.png");
-               // bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-
-                 mypic_png.Source = bitmap;
+                Dispatcher.Invoke(() =>
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    FileStream myPicStream = File.OpenRead(Environment.CurrentDirectory + @"\mypic.png");
+                    bitmap.StreamSource = (Stream)myPicStream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    mypic_png.Source = bitmap;
+                    myPicStream.Close();
+                });       
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
 
         }
+
+       
+
+
 
         private void PicTemp(object sender, RoutedEventArgs e)
         {
